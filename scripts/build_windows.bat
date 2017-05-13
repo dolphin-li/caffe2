@@ -16,6 +16,7 @@ cd %CAFFE2_ROOT%\build
 if NOT DEFINED USE_CUDA (
   set USE_CUDA=OFF
 )
+set USE_CUDA=ON
 
 if NOT DEFINED CMAKE_BUILD_TYPE (
   set CMAKE_BUILD_TYPE=Release
@@ -34,7 +35,7 @@ if NOT DEFINED CMAKE_GENERATOR (
     )
   ) else (
     :: In default we use win64 VS 2017.
-    set CMAKE_GENERATOR="Visual Studio 15 2017 Win64"
+    set CMAKE_GENERATOR="Visual Studio 14 2015 Win64"
   )
 )
 
@@ -50,6 +51,8 @@ cmake .. ^
   -DPROTOBUF_PROTOC_EXECUTABLE=%CAFFE2_ROOT%\build_host_protoc\bin\protoc.exe ^
   || exit /b
 
+cmake -G “Visual Studio 14 2015 Win64”
+  
 :: Actually run the build
 cmake --build . --config %CMAKE_BUILD_TYPE% || exit /b
 
